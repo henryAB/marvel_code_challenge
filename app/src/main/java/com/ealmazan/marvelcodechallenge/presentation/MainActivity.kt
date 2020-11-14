@@ -1,7 +1,8 @@
-package com.ealmazan.marvelcodechallenge
+package com.ealmazan.marvelcodechallenge.presentation
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.ealmazan.marvelcodechallenge.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
