@@ -6,7 +6,7 @@ package com.ealmazan.marvelcodechallenge.domain
  * @id Identificador único
  * @name Nombre del personaje
  */
-data class Character(
+data class MarvelCharacter(
     val id: Int,
     val name: String,
     val description: String,
