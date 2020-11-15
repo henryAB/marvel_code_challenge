@@ -9,6 +9,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.*
 
 const val BASE_URL = "https://gateway.marvel.com/"
+const val TS_URL_QUERY = "ts"
+const val API_KEY_URL_QUERY = "apikey"
+const val HASH_URL_QUERY = "hash"
+const val HASH_PROTOCOL = "MD5"
+const val PUBLIC_KEY = "2583f7b3361dee1749ed592f721fdc63"
+const val PRIVATE_KEY = "f7306b67755aa7817d88bd76b123f9605d3c329b"
 
 class MarvelAPI {
 
@@ -27,18 +33,16 @@ class MarvelAPI {
 
         val builder = OkHttpClient.Builder()
         builder.addInterceptor(loggingInterceptor)
-        // TODO fix passwords
-        val publicKey = "2583f7b3361dee1749ed592f721fdc63"
         val timestamp = Date().time.toString()
 
         builder.addInterceptor { chain ->
             val defaultRequest = chain.request()
             val defaultHttpUrl = defaultRequest.url
-            val hash = HashUtil.hash("${timestamp}f7306b67755aa7817d88bd76b123f9605d3c329b$publicKey", "MD5")
+            val hash = HashUtil.hash("${timestamp}$PRIVATE_KEY$PUBLIC_KEY", HASH_PROTOCOL)
             val httpUrl = defaultHttpUrl.newBuilder()
-                .addQueryParameter("ts", timestamp)
-                .addQueryParameter("apikey", publicKey)
-                .addQueryParameter("hash", hash)
+                .addQueryParameter(TS_URL_QUERY, timestamp)
+                .addQueryParameter(API_KEY_URL_QUERY, PUBLIC_KEY)
+                .addQueryParameter(HASH_URL_QUERY, hash)
                 .build()
             val requestBuilder = defaultRequest.newBuilder().url(httpUrl)
             chain.proceed(requestBuilder.build())

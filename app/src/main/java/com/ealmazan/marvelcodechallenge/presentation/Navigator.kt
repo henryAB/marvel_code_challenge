@@ -14,10 +14,7 @@ class Navigator {
         val intent = Intent(context, DetailActivity::class.java)
         intent.putExtra(CHARACTER_NAME, marvelCharacter.name)
         intent.putExtra(CHARACTER_DESCRIPTION, marvelCharacter.description)
-        intent.putExtra(
-            CHARACTER_IMAGE_PATH,
-            "${marvelCharacter.thumbnail.path}.${marvelCharacter.thumbnail.extension}"
-        )
+        intent.putExtra(CHARACTER_IMAGE_PATH, marvelCharacter.thumbnail.getFullUrl())
         context.startActivity(intent)
     }
 }

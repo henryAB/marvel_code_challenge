@@ -1,11 +1,5 @@
 package com.ealmazan.marvelcodechallenge.domain
 
-/**
- * Modelo de personajes devueltos por la API de marvel
- *
- * @id Identificador único
- * @name Nombre del personaje
- */
 data class MarvelCharacter(
     val id: Int,
     val name: String,

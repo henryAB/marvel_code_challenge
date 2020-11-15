@@ -11,7 +11,7 @@ class CharacterViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
     fun bind(marvelCharacter: MarvelCharacter, clickListener: (MarvelCharacter) -> Unit) {
         itemView.tv_character_name.text = marvelCharacter.name
         Picasso.get()
-            .load("${marvelCharacter.thumbnail.path}.${marvelCharacter.thumbnail.extension}")
+            .load(marvelCharacter.thumbnail.getFullUrl())
             .into(itemView.iv_character_photo)
         itemView.setOnClickListener {
             clickListener(marvelCharacter)
