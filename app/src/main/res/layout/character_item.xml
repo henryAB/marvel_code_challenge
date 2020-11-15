@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ImageView
+        android:id="@+id/iv_character_photo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:contentDescription="@string/iv_content_description"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/test"/>
+
+    <TextView
+        android:id="@+id/tv_character_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/black_alpha"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:padding="8dp"
+        tools:text="Hulk" />
+
+
+</RelativeLayout>

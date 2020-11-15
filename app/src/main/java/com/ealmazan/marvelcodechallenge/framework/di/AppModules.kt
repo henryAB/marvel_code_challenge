@@ -7,6 +7,7 @@ import com.ealmazan.marvelcodechallenge.data.repository.CharacterRepositoryImp
 import com.ealmazan.marvelcodechallenge.framework.persistence.CharacterDataSourceImp
 import com.ealmazan.marvelcodechallenge.framework.rest.CharacterRemoteDataSourceImp
 import com.ealmazan.marvelcodechallenge.framework.rest.MarvelAPI
+import com.ealmazan.marvelcodechallenge.presentation.Navigator
 import com.ealmazan.marvelcodechallenge.presentation.viewmodel.CharacterViewModel
 import com.ealmazan.marvelcodechallenge.usecases.GetCharacterUseCase
 import org.koin.dsl.module
@@ -22,4 +23,5 @@ val appModules = module {
     factory<CharacterRemoteDataSource> { CharacterRemoteDataSourceImp(get()) }
     factory<CharacterDataSource> { CharacterDataSourceImp() }
     single { MarvelAPI() }
+    single { Navigator() }
 }
