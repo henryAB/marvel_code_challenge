@@ -16,7 +16,6 @@ import kotlinx.android.synthetic.main.load_item.*
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
 class MainActivity : AppCompatActivity() {
 
     private val navigator: Navigator by inject()
@@ -49,6 +48,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+        characterViewModel.loadMore.observe(this, { loadMore -> characterAdapter.loadMore = loadMore })
         characterViewModel.requestCharacters()
     }
 

@@ -1,5 +1,6 @@
 package com.ealmazan.marvelcodechallenge.presentation.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,17 +14,24 @@ import kotlinx.coroutines.launch
 
 const val PAGE_SIZE = 20
 
-class CharacterViewModel(private val getCharacterUseCases: GetCharacterUseCase) : ViewModel() {
+class CharacterViewModel(private val getCharactersUseCases: GetCharacterUseCase) : ViewModel() {
 
     val wrapper = MutableLiveData<Either<ErrorType, CharacterWrapper>>()
+    val loadMore = MutableLiveData<Boolean>()
     private var lastOffset = 0
+    private var totalCount = 0
     private var isLoading = false
 
     fun requestCharacters() {
         CoroutineScope(Dispatchers.IO).launch {
-            val newWrapper = getCharacterUseCases.invoke(lastOffset)
+            val newWrapper = getCharactersUseCases.invoke(lastOffset)
             if (newWrapper is Either.Right) {
+                totalCount = newWrapper.r.data.total
                 lastOffset = newWrapper.r.data.offset + PAGE_SIZE
+                Log.i(CharacterViewModel::class.java.canonicalName, "Offset: $lastOffset Total count: $totalCount")
+                if (lastOffset > totalCount) {
+                    loadMore.postValue(false)
+                }
             }
             wrapper.postValue(newWrapper)
             isLoading = false

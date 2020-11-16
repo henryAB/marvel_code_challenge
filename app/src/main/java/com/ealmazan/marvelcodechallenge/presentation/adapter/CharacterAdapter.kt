@@ -15,6 +15,7 @@ const val LOADING_TYPE = 1
 class CharacterAdapter(private val clickListener: (MarvelCharacter) -> Unit) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    var loadMore = true
     var data: MutableList<MarvelCharacter> by Delegates.observable(mutableListOf()) { _, _, _ -> notifyDataSetChanged() }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -43,6 +44,13 @@ class CharacterAdapter(private val clickListener: (MarvelCharacter) -> Unit) :
         }
     }
 
-    override fun getItemCount(): Int = data.size + 1
+    override fun getItemCount(): Int {
+        return if (loadMore) {
+            data.size + 1
+        } else {
+            data.size
+        }
+    }
+
 }
 
